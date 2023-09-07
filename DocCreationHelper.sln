@@ -1,6 +1,6 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "doc-creation-helper", "doc-creation-helper\doc-creation-helper.csproj", "{7856A9DA-1734-44D8-AAF1-69D623D86082}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DocCreationHelper", "DocCreationHelper\DocCreationHelper.csproj", "{7856A9DA-1734-44D8-AAF1-69D623D86082}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -4,14 +4,20 @@
         <TargetFramework>net6.0</TargetFramework>
         <ImplicitUsings>enable</ImplicitUsings>
         <Nullable>enable</Nullable>
-        <AssemblyName>doc-creation-helper</AssemblyName>
+        <AssemblyName>DocCreationHelper</AssemblyName>
         <RootNamespace>DocCreationHelper</RootNamespace>
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+        <Copyright>Copyright (c) 2023 Eugene Kunilovsky</Copyright>
+        <PackageLicenseFile>license.txt</PackageLicenseFile>
     </PropertyGroup>
 
     <ItemGroup>
         <PackageReference Include="Information.DbDocumentation" Version="6.0.13" />
         <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+    </ItemGroup>
+
+    <ItemGroup>
+        <None Include="..\license.txt" Pack="true" PackagePath=""/>
     </ItemGroup>
 
 </Project>

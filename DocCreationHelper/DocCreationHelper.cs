@@ -3,7 +3,7 @@ using Information.DbDocumentation.XmlDocExtractor;
 using Newtonsoft.Json;
 using Formatting = Newtonsoft.Json.Formatting;
 
-namespace MycAuthServer.DocCreationHelper;
+namespace DocCreationHelper;
 
 public static class DocCreation
 {

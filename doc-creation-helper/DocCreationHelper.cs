@@ -15,7 +15,7 @@ public static class DocCreation
         var outputHelper =
             $"Type: {fullPathClass.Name}{Environment.NewLine}Description: {xmlDocExtractor.GetClassSummary(fullPathClass.FullName)}{Environment.NewLine}" +
             Environment.NewLine + $"| Field | Type | isNullable | Description |" + Environment.NewLine +
-            "| --- | --- | --- | --- |"+ Environment.NewLine;
+            "| --- | --- | --- | --- |" + Environment.NewLine;
         foreach (var prop in fullPathClass
                      .GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty))
         {
@@ -33,7 +33,8 @@ public static class DocCreation
 
             var name = prop.Name;
             outputHelper = outputHelper +
-                           $"| {name} | {propertyTypeName} | {propertyIsNullable} | {xmlDocExtractor.GetPropertySummary(fullPath)} |" + Environment.NewLine;
+                           $"| {name} | {propertyTypeName} | {propertyIsNullable} | {xmlDocExtractor.GetPropertySummary(fullPath)} |" +
+                           Environment.NewLine;
         }
 
         return outputHelper;
@@ -54,6 +55,7 @@ public static class DocCreation
                     NullValueHandling = NullValueHandling.Ignore,
                 })}";
         }
+
         return outputHelper;
     }
 }

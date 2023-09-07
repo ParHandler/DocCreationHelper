@@ -6,6 +6,7 @@
         <Nullable>enable</Nullable>
         <AssemblyName>doc-creation-helper</AssemblyName>
         <RootNamespace>DocCreationHelper</RootNamespace>
+        <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     </PropertyGroup>
 
     <ItemGroup>

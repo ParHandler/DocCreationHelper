@@ -9,6 +9,13 @@
         <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
         <Copyright>Copyright (c) 2023 Eugene Kunilovsky</Copyright>
         <PackageLicenseFile>license.txt</PackageLicenseFile>
+        <RepositoryUrl>https://github.com/ParHandler/DocCreationHelper</RepositoryUrl>
+        <RepositoryType>git</RepositoryType>
+        <PublishRepositoryUrl>true</PublishRepositoryUrl>
+        <EmbedUntrackedSources>true</EmbedUntrackedSources>
+        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
+        <IncludeSymbols>true</IncludeSymbols>
+        <Version>1.0.1</Version>
     </PropertyGroup>
 
     <ItemGroup>
@@ -17,7 +24,7 @@
     </ItemGroup>
 
     <ItemGroup>
-        <None Include="..\license.txt" Pack="true" PackagePath=""/>
+        <None Include="..\license.txt" Pack="true" PackagePath="" />
     </ItemGroup>
 
 </Project>

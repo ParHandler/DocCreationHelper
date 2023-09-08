@@ -24,7 +24,6 @@ public class MarkdownTableGenerator : ITableGenerator
 
         // Выводим имя класса и его описание в формате Markdown
         outputBuilder.AppendLine($"Type: {className}");
-        outputBuilder.AppendLine(); // Пустая строка для разделения
         outputBuilder.AppendLine($"Description: {classDescription}");
         outputBuilder.AppendLine(); // Пустая строка для разделения
 

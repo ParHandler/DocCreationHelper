@@ -6,11 +6,11 @@ namespace DocCreationHelper;
 
 public class AsciiDocTableGenerator : ITableGenerator
 {
-    private readonly XmlDocExtractor xmlDocExtractor;
+    private readonly XmlDocExtractor _xmlDocExtractor;
 
     public AsciiDocTableGenerator(XmlDocExtractor xmlDocExtractor)
     {
-        this.xmlDocExtractor = xmlDocExtractor ?? throw new ArgumentNullException(nameof(xmlDocExtractor));
+        this._xmlDocExtractor = xmlDocExtractor ?? throw new ArgumentNullException(nameof(xmlDocExtractor));
     }
 
     public string GenerateTable(object parseObject)
@@ -18,12 +18,21 @@ public class AsciiDocTableGenerator : ITableGenerator
         var fullPathClass = parseObject.GetType();
         var outputBuilder = new StringBuilder();
 
+        // Имя класса и его описание из XML-документации
+        var className = fullPathClass.Name;
+        var classDescription = _xmlDocExtractor.GetClassSummary(fullPathClass.FullName);
+        outputBuilder.AppendLine($"Class: {className}");
+        outputBuilder.AppendLine($"Description: {classDescription}");
+
         // Заголовок таблицы AsciiDoc
         outputBuilder.AppendLine("[options=\"header\"]");
         outputBuilder.AppendLine("|===");
-        outputBuilder.AppendLine("| Field | Type | isNullable | Description |");
 
-        foreach (var prop in fullPathClass.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty))
+        // Заголовок таблицы свойств
+        outputBuilder.AppendLine("| Field | Type | isNullable | Description");
+
+        foreach (var prop in fullPathClass.GetProperties(BindingFlags.Public | BindingFlags.Instance |
+                                                         BindingFlags.GetProperty))
         {
             var fullPath = $"{fullPathClass.FullName}.{prop.Name}";
             var propertyTypeName = $"{prop.PropertyType.Name}";
@@ -39,10 +48,10 @@ public class AsciiDocTableGenerator : ITableGenerator
             var name = prop.Name;
 
             // Используем xmlDocExtractor для получения описания свойства из XML-документации
-            var propertyDescription = xmlDocExtractor.GetPropertySummary(fullPath);
+            var propertyDescription = _xmlDocExtractor.GetPropertySummary(fullPath);
 
             // Добавляем строку с информацией о свойстве в таблицу
-            outputBuilder.AppendLine($"| {name} | {propertyTypeName} | {propertyIsNullable} | {propertyDescription} |");
+            outputBuilder.AppendLine($"| {name} | {propertyTypeName} | {propertyIsNullable} | {propertyDescription}");
         }
 
         // Закрываем таблицу AsciiDoc

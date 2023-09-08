@@ -5,7 +5,7 @@ using Formatting = Newtonsoft.Json.Formatting;
 
 namespace DocCreationHelper;
 
-public static class DocCreation
+public static class DocCreationDepr
 {
     public static string WriteTestOutputHelperStructure(object parseObject)
     {

@@ -52,7 +52,7 @@ public class MarkdownTableGenerator : ITableGenerator
 
             // Добавляем строку с информацией о свойстве в таблицу
             outputBuilder.AppendLine(
-                $"| {name} | {propertyTypeName} | {propertyIsNullable} | {propertyDescription}");
+                $"| {name} | {propertyTypeName} | {propertyIsNullable} | {propertyDescription} |");
         }
 
         return outputBuilder.ToString();

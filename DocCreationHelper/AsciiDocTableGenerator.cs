@@ -21,8 +21,12 @@ public class AsciiDocTableGenerator : ITableGenerator
         // Имя класса и его описание из XML-документации
         var className = fullPathClass.Name;
         var classDescription = _xmlDocExtractor.GetClassSummary(fullPathClass.FullName);
+
+        // Выводим имя класса и его описание в формате AsciiDoc
         outputBuilder.AppendLine($"Class: {className}");
+        outputBuilder.AppendLine(); // Пустая строка для разделения
         outputBuilder.AppendLine($"Description: {classDescription}");
+        outputBuilder.AppendLine(); // Пустая строка для разделения
 
         // Заголовок таблицы AsciiDoc
         outputBuilder.AppendLine("[options=\"header\"]");
@@ -51,7 +55,8 @@ public class AsciiDocTableGenerator : ITableGenerator
             var propertyDescription = _xmlDocExtractor.GetPropertySummary(fullPath);
 
             // Добавляем строку с информацией о свойстве в таблицу
-            outputBuilder.AppendLine($"| {name} | {propertyTypeName} | {propertyIsNullable} | {propertyDescription}");
+            outputBuilder.AppendLine(
+                $"| {name} | {propertyTypeName} | {propertyIsNullable} | {propertyDescription}");
         }
 
         // Закрываем таблицу AsciiDoc

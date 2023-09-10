@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using Information.DbDocumentation.XmlDocExtractor;
+using Newtonsoft.Json;
 using YamlDotNet.Serialization;
 
 namespace DocCreationHelper
@@ -66,8 +67,13 @@ namespace DocCreationHelper
                 // Используем xmlDocExtractor для получения описания свойства из XML-документации
                 var propertyDescription = _xmlDocExtractor.GetPropertySummary(fullPath);
 
-                // Получаем значение поля из parseObject
-                var example = prop.GetValue(parseObject);
+                // Получаем значение поля из parseObject и преобразуем в JSON строку с учетом настроек
+                var example = JsonConvert.SerializeObject(prop.GetValue(parseObject), new JsonSerializerSettings
+                {
+                    Formatting = Formatting.None,
+                    PreserveReferencesHandling = PreserveReferencesHandling.Objects,
+                    NullValueHandling = NullValueHandling.Ignore,
+                });
 
                 // Создаем объект для описания свойства и добавляем его в словарь
                 propertyDescriptions[name] = new PropertyInfoDescription
@@ -87,7 +93,7 @@ namespace DocCreationHelper
             public string type { get; set; } = string.Empty;
             public string isNullable { get; set; } = string.Empty;
             public string description { get; set; } = string.Empty;
-            public object example { get; set; } // Свойство для примера
+            public string example { get; set; } = string.Empty; // Свойство для примера
         }
     }
 }

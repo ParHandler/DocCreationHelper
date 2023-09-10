@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Reflection;
 using Information.DbDocumentation.XmlDocExtractor;
 using YamlDotNet.Serialization;
@@ -42,14 +43,13 @@ namespace DocCreationHelper
             return yaml;
         }
 
-        private object[] GetPropertyDescriptions(Type type)
+        private Dictionary<string, PropertyInfoDescription> GetPropertyDescriptions(Type type)
         {
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty);
-            var propertyDescriptions = new object[properties.Length];
+            var propertyDescriptions = new Dictionary<string, PropertyInfoDescription>();
 
-            for (var i = 0; i < properties.Length; i++)
+            foreach (var prop in properties)
             {
-                var prop = properties[i];
                 var fullPath = $"{type.FullName}.{prop.Name}";
                 var propertyTypeName = $"{prop.PropertyType.Name}";
                 var propertyIsNullable = "";
@@ -66,10 +66,9 @@ namespace DocCreationHelper
                 // Используем xmlDocExtractor для получения описания свойства из XML-документации
                 var propertyDescription = _xmlDocExtractor.GetPropertySummary(fullPath);
 
-                // Создаем объект для описания свойства
-                propertyDescriptions[i] = new
+                // Создаем объект для описания свойства и добавляем его в словарь
+                propertyDescriptions[name] = new PropertyInfoDescription
                 {
-                    field = name,
                     type = propertyTypeName,
                     isNullable = propertyIsNullable,
                     description = propertyDescription
@@ -77,6 +76,13 @@ namespace DocCreationHelper
             }
 
             return propertyDescriptions;
+        }
+
+        private class PropertyInfoDescription
+        {
+            public string type { get; set; } = string.Empty;
+            public string isNullable { get; set; } = string.Empty;
+            public string description { get; set; } = string.Empty;
         }
     }
 }

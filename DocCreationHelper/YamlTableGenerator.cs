@@ -33,7 +33,7 @@ namespace DocCreationHelper
                     type = fullPathClass.Name,
                     description = _xmlDocExtractor.GetClassSummary(fullPathClass.FullName)
                 },
-                properties = GetPropertyDescriptions(fullPathClass)
+                properties = GetPropertyDescriptions(fullPathClass, parseObject)
             };
 
             // Сериализуем объект YAML
@@ -43,7 +43,7 @@ namespace DocCreationHelper
             return yaml;
         }
 
-        private Dictionary<string, PropertyInfoDescription> GetPropertyDescriptions(Type type)
+        private Dictionary<string, PropertyInfoDescription> GetPropertyDescriptions(Type type, object parseObject)
         {
             var properties = type.GetProperties(BindingFlags.Public | BindingFlags.Instance | BindingFlags.GetProperty);
             var propertyDescriptions = new Dictionary<string, PropertyInfoDescription>();
@@ -66,12 +66,16 @@ namespace DocCreationHelper
                 // Используем xmlDocExtractor для получения описания свойства из XML-документации
                 var propertyDescription = _xmlDocExtractor.GetPropertySummary(fullPath);
 
+                // Получаем значение поля из parseObject
+                var example = prop.GetValue(parseObject);
+
                 // Создаем объект для описания свойства и добавляем его в словарь
                 propertyDescriptions[name] = new PropertyInfoDescription
                 {
                     type = propertyTypeName,
                     isNullable = propertyIsNullable,
-                    description = propertyDescription
+                    description = propertyDescription,
+                    example = example
                 };
             }
 
@@ -83,6 +87,7 @@ namespace DocCreationHelper
             public string type { get; set; } = string.Empty;
             public string isNullable { get; set; } = string.Empty;
             public string description { get; set; } = string.Empty;
+            public object example { get; set; } // Свойство для примера
         }
     }
 }

@@ -64,4 +64,9 @@ public class AsciiDocTableGenerator : ITableGenerator
 
         return outputBuilder.ToString();
     }
+
+    public string GenerateTableFromYaml(string yaml)
+    {
+        throw new NotImplementedException();
+    }
 }

@@ -9,6 +9,11 @@ public static class DocCreation
         return tableGenerator.GenerateTable(parseObject);
     }
     
+    public static string WriteTestOutputHelperStructureFromYaml(string yaml, ITableGenerator tableGenerator)
+    {
+        return tableGenerator.GenerateTableFromYaml(yaml);
+    }
+    
     public static string WriteTestOutputHelperExample(object parseObject)
     {
         var objectMap = new Dictionary<string, object> { { parseObject.GetType().Name, parseObject } };

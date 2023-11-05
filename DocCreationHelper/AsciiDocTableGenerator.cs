@@ -23,9 +23,9 @@ public class AsciiDocTableGenerator : ITableGenerator
         var classDescription = _xmlDocExtractor.GetClassSummary(fullPathClass.FullName);
 
         // Выводим имя класса и его описание в формате AsciiDoc
-        outputBuilder.AppendLine($"Class: {className}");
+        outputBuilder.AppendLine($"*Class*: {className}");
         outputBuilder.AppendLine(); // Пустая строка для разделения
-        outputBuilder.AppendLine($"Description: {classDescription}");
+        outputBuilder.AppendLine($"*Description*: {classDescription}");
         outputBuilder.AppendLine(); // Пустая строка для разделения
 
         // Заголовок таблицы AsciiDoc

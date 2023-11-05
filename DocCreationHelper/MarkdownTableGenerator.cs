@@ -28,8 +28,8 @@ public class MarkdownTableGenerator : ITableGenerator
         outputBuilder.AppendLine(); // Пустая строка для разделения
 
         // Заголовок таблицы Markdown
-        outputBuilder.AppendLine("| Field | Type | isNullable | Description |");
-        outputBuilder.AppendLine("| --- | --- | --- | --- |");
+        outputBuilder.AppendLine("| **Field** | **Type** | **isNullable** | **Description** |");
+        //outputBuilder.AppendLine("| --- | --- | --- | --- |");
 
         foreach (var prop in fullPathClass.GetProperties(BindingFlags.Public | BindingFlags.Instance |
                                                          BindingFlags.GetProperty))

@@ -17,7 +17,13 @@ public static class DocCreation
     public static string WriteTestOutputHelperExample(object parseObject)
     {
         var objectMap = new Dictionary<string, object> { { parseObject.GetType().Name, parseObject } };
-        var outputHelper = $@"**payload**";
+        var outputHelper = $@":prewrap!:
+.payload
+[%collapsible]
+====
+[source,json#, linenums, indent=0]
+----
+";
         foreach (var kvp in objectMap)
         {
             outputHelper = outputHelper + $@"{JsonConvert.SerializeObject(
@@ -29,7 +35,9 @@ public static class DocCreation
                     NullValueHandling = NullValueHandling.Ignore,
                 })}";
         }
-
+        outputHelper = outputHelper + $@"
+----
+====";
         return outputHelper;
     }
 }
